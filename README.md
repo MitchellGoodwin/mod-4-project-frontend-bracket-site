@@ -1,68 +1,63 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Mod 4 Project
 
-## Available Scripts
+## Project Idea
 
-In the project directory, you can run:
+My Idea is to make a site for making, and entering tournament brackets for competitions. I've used these for different competitions (mainly video game related), and I think it would be fun to be able to take a crack at creating my own.
 
-### `yarn start`
+Examples of similar sites: https://challonge.com/, https://smash.gg/
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## General User Flow
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The site will have a navbar at the top of every page, with a site title and login/out, signup buttons.
 
-### `yarn test`
+The page will have a list of different tournaments that they can click on to go to that tournament's bracket page. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+That page will have the bracket up top with all the matches, showing the winners of each moving on to the next round until someone wins. At the bottom portion of the page there will be a standings table of the competitors.
 
-### `yarn build`
+If the user is logged in they can enter a tournament that they don't own, and hasnt started yet. They can edit their entry somewhat, including dropping out of the competition.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A user can also create their own tournament, filling out a form to define properties of the tournament. To start it will be a name, picture, and description, but I'd like to add more later as a part of stretch goals, like setting an entry fee.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Once created other users can sign up for their tournament and the admin can change their seed value to change where people are in the bracket. I want the site to be responsive and create empty matches for the tournament according to number of entreants. The admin can mark the tournament as started, at which point no new users can join. Once started the admin can mark scores and winners of each match and the site will update to move the right entrant forward. For the purpose of the mvp I will assume each tournament is being run in person by the admin.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Once complete the bracket cannot be edited anymore, but still viewed.
 
-### `yarn eject`
+## Schema
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+As of now I see my models as being:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Users
+* Brackets
+* Matches
+* Entries
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The relationships get a little wonky:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Each bracket belongs to one user as an admin
+* Users also have many brackets through entries and vice versa
+* A bracket has many matches, which belong to two users
 
-## Learn More
+The above schema is kinda likly to change, as everything is pretty intermingeled. But for now, this is how I visualize it.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## MVP
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+I'm hoping to reach my mvp by the weekend. I'd like most of the base functionality listed above. For the brackets themselves, for this weekend if I can get all of the matches listed on the page, but not connected in a bracket style, with an ability to select a winner I'll be happy.
 
-### Code Splitting
+I'm going to start on my user model with authorization first, as I think my site will rely on that to make sense a good amount. From there, figure out the logic for generating matches correctly from varying amounts of entrants.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Stretch Goals
 
-### Analyzing the Bundle Size
+* Mainly make the bracket display in a classic bracket style, with lines forming a sideways pyramid shape. This is my main stretch goal
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+* Toggle showing predicted winners on the bracket view for each uncompleted match.
 
-### Making a Progressive Web App
+* Add an ability to take real payment for entry fees.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+* Add websockets for:
+    * Notifications
+    * Chat with the tournament admin
+    * Chat with your match opponent
 
-### Advanced Configuration
+* Add an MMR score tracker for users according to match history, and use it to auto generate recommended seeding.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* Email notifications
