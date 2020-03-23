@@ -10,23 +10,26 @@ class BracketShow extends React.Component{
     state = {
         bracket: [],
         entrants: [],
+        user: ''
     }
 
     componentDidMount() {
         fetch(`http://localhost:3000/brackets/${this.props.match.params.bracketID}`,{
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
-            // 'Authorization': localStorage.getItem('auth_token')
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('auth_token')
         }
         })
         .then(res => res.json())
-        .then(data => this.setState({
+        .then(data => {
+            this.setState({
             bracket: data,
             entrants: data.entries.sort((a, b) => {
                 return a.seed - b.seed;
-            })
-        }))
+            })    
+        })
+    })
     }
 
     handleSeedChange = (seed, id) => {
@@ -70,7 +73,7 @@ class BracketShow extends React.Component{
             <div>
                 <h1>{this.state.bracket.name}</h1>
                 <MatchContainer matches={this.state.bracket.matches} handleWinner={this.handleWinner}/>
-                <EntrantsContainer status={this.state.bracket.status} entrants={this.state.entrants} handleSeedChange={this.handleSeedChange}/>
+                <EntrantsContainer status={this.state.bracket.status} user={this.state.bracket.user} entrants={this.state.entrants} handleSeedChange={this.handleSeedChange}/>
             </div>
         )
     }

@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css'
 import NavBar from './Components/NavBar'
 import Brackets from './Containers/Brackets'
 import BracketShow from './Containers/BracketShow'
+import BracketForm from './Components/BracketForm'
 
 import {
   BrowserRouter as Router,
@@ -19,7 +20,7 @@ import SignUp from './Auth/SignUp';
 class App extends React.Component {
 
   state = {
-    logged_in: false
+    logged_in: false,
   }
 
   handleLogin = () => {
@@ -39,7 +40,7 @@ class App extends React.Component {
         <Switch>
 
           <Route exact path='/' component={() => {
-            return <CheckLogin component={Brackets} />
+            return <Brackets />
           }} />
           
           <Route exact path='/login' component={() => {
@@ -54,6 +55,11 @@ class App extends React.Component {
             this.handleLogout()
             return <Redirect to='/login' />
           }} />
+
+          <Route exact path='/brackets/new' component={() => {
+            return <CheckLogin component={BracketForm} />
+          }} />
+
           <Route path='/brackets/:bracketID' render={routerProps => <BracketShow {...routerProps} /> }/>
           <Route>
             <Redirect to='/' />

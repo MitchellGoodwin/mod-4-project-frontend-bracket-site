@@ -19,7 +19,7 @@ class EntrantsContainer extends React.Component{
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {this.props.entrants.map(entrant => <Entrant status={this.props.status} entrant={entrant} key={entrant.id} seedRange={seedRange} handleSeedChange={this.props.handleSeedChange}/>)}
+                    {this.props.entrants.map(entrant => <Entrant status={this.props.status} user={this.props.user} entrant={entrant} key={entrant.id} seedRange={seedRange} handleSeedChange={this.props.handleSeedChange}/>)}
                 </Table.Body>
 
             </Table>

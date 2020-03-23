@@ -27,8 +27,8 @@ class SignUp extends Component {
         })
         .then(res => res.json())
         .then(data => {
-        console.log(data)
         localStorage.setItem('auth_token',data.jwt)
+        localStorage.setItem('user_id', data.user.id)
         this.props.handleLogin()
         this.props.history.push('/')
         })

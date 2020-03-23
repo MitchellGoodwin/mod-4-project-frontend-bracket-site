@@ -6,6 +6,20 @@ const RenderLoggedIn = () => {
     return (
         <Menu>
             <Menu.Item
+            name='brackets'
+            >
+                <Link to='/brackets/'>
+                    Bracket Index
+                </Link>
+            </Menu.Item>
+            <Menu.Item
+            name='bracketform'
+            >
+                <Link to='/brackets/new'>
+                    Create New Bracket
+                </Link>
+            </Menu.Item>
+            <Menu.Item
             name='logout'
             >
                 <Link to='/logout'>
@@ -20,20 +34,28 @@ const RenderLoggedOut = () => {
     return (
         <Menu>
             <Menu.Item
-                name='login'
-                >
-                    <Link to='/login'>
-                        Login
-                    </Link>
-                </Menu.Item>
+            name='brackets'
+            >
+                <Link to='/brackets/'>
+                    Bracket Index
+                </Link>
+            </Menu.Item>
 
-                <Menu.Item
-                name='signup'
-                >
-                    <Link to='/signup'>
-                        Signup
-                    </Link>
-                </Menu.Item>
+            <Menu.Item
+            name='login'
+            >
+                <Link to='/login'>
+                    Login
+                </Link>
+            </Menu.Item>
+
+            <Menu.Item
+            name='signup'
+            >
+                <Link to='/signup'>
+                    Signup
+                </Link>
+            </Menu.Item>
         </Menu>
     )
 }
