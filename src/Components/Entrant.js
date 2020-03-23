@@ -1,0 +1,34 @@
+import React from 'react'
+import { Table, Dropdown } from 'semantic-ui-react'
+
+class Entrant extends React.Component{
+
+    handleSeedChange = (e) => {
+        debugger
+    }
+
+    render() {
+        return(
+            <Table.Row>
+                <Table.Cell>
+                    {this.props.entrant.seed}
+                </Table.Cell>
+                <Table.Cell>{this.props.entrant.user.username}</Table.Cell>
+                <Table.Cell>
+                    {this.props.status === 'pending' ?
+                    <Dropdown value={this.props.entrant.seed} text={this.props.entrant.seed}>
+                        <Dropdown.Menu onChange={this.props.handleSeedChange}>
+                            {this.props.seedRange.map(seed => <Dropdown.Item onClick={() => this.props.handleSeedChange(seed, this.props.entrant.id)} key={seed} value={seed}>{seed}</Dropdown.Item>)}
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    : 'Tournament Started'}
+                </Table.Cell>
+            </Table.Row>
+        )
+    }
+
+
+}
+
+
+export default Entrant

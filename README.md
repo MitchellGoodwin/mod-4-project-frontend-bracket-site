@@ -60,4 +60,13 @@ I'm going to start on my user model with authorization first, as I think my site
 
 * Add an MMR score tracker for users according to match history, and use it to auto generate recommended seeding.
 
+* Drag and Drop entrants on the bracket to change seeding
+
 * Email notifications
+
+* Add support for not just single elimination tournaments
+
+## TODO:
+
+
+* If you are going to deploy, make CORS match
