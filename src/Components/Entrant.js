@@ -13,14 +13,14 @@ class Entrant extends React.Component{
                 <Table.Cell>{this.props.entrant.user.username}</Table.Cell>
                 <Table.Cell>
                     {this.props.status === 'pending' ?
-                    this.props.user.id === localStorage.getItem('user_id') ? 
+                    this.props.user.id === parseInt(localStorage.getItem('user_id')) ? 
                         <div>
                         <Dropdown value={this.props.entrant.seed} text={this.props.entrant.seed}>
                             <Dropdown.Menu onChange={this.props.handleSeedChange}>
                                 {this.props.seedRange.map(seed => <Dropdown.Item onClick={() => this.props.handleSeedChange(seed, this.props.entrant.id)} key={seed} value={seed}>{seed}</Dropdown.Item>)}
                             </Dropdown.Menu>
                         </Dropdown>
-                        <Button color='Red'>Kick Competitor</Button>
+                        <Button color='Red' onClick={() => this.props.handleDeleteEntry(this.props.entrant.id)}>Kick Competitor</Button>
                         </div>
                         : this.props.entrant.seed
                     : 'Tournament Started'}
