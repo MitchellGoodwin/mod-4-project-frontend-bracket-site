@@ -74,7 +74,7 @@ class App extends React.Component {
             return <CheckLogin component={BracketForm} />
           }} />
 
-          <Route path='/brackets/:bracketID' render={routerProps => <BracketShow {...routerProps} /> }/>
+          <Route path='/brackets/:bracketID' render={routerProps => <BracketShow user={this.state.logged_user} {...routerProps} /> }/>
           <Route>
             <Redirect to='/' />
           </Route>

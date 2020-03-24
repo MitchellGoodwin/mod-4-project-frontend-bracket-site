@@ -15,7 +15,7 @@ const Match = (props) => {
                             fluid
                             compact
                             color={props.match.user_one && props.match.winner && props.match.user_one.username === props.match.winner.username ? 'green' : 'grey'}
-                            onClick={props.winner || !props.match.user_one || props.status !== 'started' || !props.match.user_two || !localStorage.getItem('auth_token') ? null : () => props.handleWinner(props.match.user_one.id, props.match.id)}
+                            onClick={props.winner || !props.match.user_one || props.status !== 'started' || !props.match.user_two || !props.bracket_user ? null : () => props.handleWinner(props.match.user_one.id, props.match.id)}
                             >
                                 {props.match.user_one ? props.match.user_one.username : 'pending'}
                         </Button>

@@ -1,7 +1,7 @@
 import React from 'react'
 import EntrantsContainer from './EntrantsContainer'
 import MatchContainer from './MatchContainer'
-import { Button, Header } from 'semantic-ui-react'
+import { Button, Header, Loader } from 'semantic-ui-react'
 
 
 class BracketShow extends React.Component{
@@ -10,12 +10,12 @@ class BracketShow extends React.Component{
     state = {
         bracket: [],
         entrants: [],
-        user: ''
+        loading: true,
     }
 
     inBracket = () => {
-        if (localStorage.getItem('user_id') && parseInt(localStorage.getItem('user_id')) !== this.state.bracket.user_id && this.state.bracket.status === 'pending') {
-            let entries = this.state.entrants.filter(entry => entry.user.id === parseInt(localStorage.getItem('user_id')))
+        if (this.props.user && this.props.user.id !== this.state.bracket.user_id && this.state.bracket.status === 'pending') {
+            let entries = this.state.entrants.filter(entry => entry.user.id === this.props.user.id)
             return (entries.length > 0 ?
             <Button color='red' onClick={() => this.handleDeleteEntry(entries[0].id)}>Leave Tournament</Button> 
             : <Button color='green' onClick={this.handleMakeEntry}>Enter Tournament</Button>)
@@ -23,7 +23,7 @@ class BracketShow extends React.Component{
     }
 
     renderOnStatus = () => {
-        if (this.state.bracket.status === 'pending' && this.state.bracket.user.id === parseInt(localStorage.getItem('user_id'))) {
+        if (this.state.bracket.status === 'pending' && this.state.bracket.user.id === this.props.user.id) {
             return <Button onClick={this.handleChangeStatus} className='title' >Start Tournament</Button>
         } else if (this.state.bracket.status === 'started') {
             return <h2 className='title' >Tournament In Progress</h2>
@@ -39,6 +39,7 @@ class BracketShow extends React.Component{
     }
 
     handleChangeStatus = () => {
+        this.setState({loading: true})
         fetch(`http://localhost:3000/brackets/${this.state.bracket.id}`,{
         method: 'PATCH',
         headers: {
@@ -53,19 +54,21 @@ class BracketShow extends React.Component{
             bracket: data,
             entrants: data.entries.sort((a, b) => {
                 return a.seed - b.seed;
-            })    
+            }),
+            loading: false    
         })
     })
     }
 
     handleMakeEntry = () => {
+        this.setState({loading: true})
         fetch('http://localhost:3000/entries',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('auth_token')
         },
-        body: JSON.stringify({ user_id: parseInt(localStorage.getItem('user_id')),
+        body: JSON.stringify({ user_id: this.props.user.id,
             bracket_id: this.state.bracket.id})
         })
         .then(res => res.json())
@@ -74,12 +77,14 @@ class BracketShow extends React.Component{
                 bracket: data,
                 entrants: data.entries.sort((a, b) => {
                     return a.seed - b.seed;
-                })    
+                }),
+                loading: false,    
             })
         })
     }
 
     handleDeleteEntry = (id) => {
+        this.setState({loading: true})
         fetch(`http://localhost:3000/entries/${id}`,{
             method: 'DELETE',
             headers: {
@@ -93,7 +98,8 @@ class BracketShow extends React.Component{
                     bracket: data,
                     entrants: data.entries.sort((a, b) => {
                         return a.seed - b.seed;
-                    })    
+                    }), 
+                    loading: false    
                 })
             })
     }
@@ -112,12 +118,14 @@ class BracketShow extends React.Component{
             bracket: data,
             entrants: data.entries.sort((a, b) => {
                 return a.seed - b.seed;
-            })    
+            }),
+            loading: false,    
         })
     })
     }
 
     handleSeedChange = (seed, id) => {
+        this.setState({loading: true})
         fetch(`http://localhost:3000/entries/${id}`,{
         method: 'PATCH',
         headers: {
@@ -131,11 +139,13 @@ class BracketShow extends React.Component{
             bracket: data,
             entrants: data.entries.sort((a, b) => {
                 return a.seed - b.seed;
-            })
+            }),
+            loading: false,
         }))
     }
 
     handleWinner = (winnerID, id) => {
+        this.setState({loading: true})
         fetch(`http://localhost:3000/matches/${id}`,{
         method: 'PATCH',
         headers: {
@@ -149,7 +159,8 @@ class BracketShow extends React.Component{
             bracket: data,
             entrants: data.entries.sort((a, b) => {
                 return a.seed - b.seed;
-            })
+            }),
+            loading: false
         }))
     }
 
@@ -162,8 +173,18 @@ class BracketShow extends React.Component{
                 <br/><br/>
                 {this.renderOnStatus()}
                 <br/><br/>
-                <MatchContainer status={this.state.bracket.status} matches={this.state.bracket.matches} handleWinner={this.handleWinner}/>
-                <EntrantsContainer status={this.state.bracket.status} handleDeleteEntry={this.handleDeleteEntry} user={this.state.bracket.user} entrants={this.state.entrants} handleSeedChange={this.handleSeedChange}/>
+                <Loader  active={this.state.loading} size='massive'>
+                </Loader>
+                {!this.state.loading ? <>
+                <MatchContainer 
+                    status={this.state.bracket.status} 
+                    bracket_user={this.props.user ? (this.props.user.id === this.state.bracket.user_id ? true : false) : false} 
+                    matches={this.state.bracket.matches} 
+                    handleWinner={this.handleWinner}
+                    />
+                <EntrantsContainer status={this.state.bracket.status} handleDeleteEntry={this.handleDeleteEntry} user={this.state.bracket.user} logged_user={this.props.user} entrants={this.state.entrants} handleSeedChange={this.handleSeedChange}/>
+                </>
+            : null}
             </div>
         )
     }

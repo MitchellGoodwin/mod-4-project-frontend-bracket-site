@@ -13,9 +13,9 @@ class Entrant extends React.Component{
                 <Table.Cell>{this.props.entrant.user.username}</Table.Cell>
                 <Table.Cell>
                     {this.props.status === 'pending' ?
-                    this.props.user.id === parseInt(localStorage.getItem('user_id')) ? 
+                    this.props.user.id === this.props.logged_user.id ? 
                         <div>
-                        <Dropdown value={this.props.entrant.seed} text={this.props.entrant.seed}>
+                        <Dropdown scrolling floating value={this.props.entrant.seed} text={this.props.entrant.seed}>
                             <Dropdown.Menu onChange={this.props.handleSeedChange}>
                                 {this.props.seedRange.map(seed => <Dropdown.Item onClick={() => this.props.handleSeedChange(seed, this.props.entrant.id)} key={seed} value={seed}>{seed}</Dropdown.Item>)}
                             </Dropdown.Menu>
