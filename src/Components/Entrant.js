@@ -15,12 +15,23 @@ class Entrant extends React.Component{
                     {this.props.status === 'pending' ?
                     this.props.user.id === this.props.logged_user.id ? 
                         <div>
-                        <Dropdown scrolling floating value={this.props.entrant.seed} text={this.props.entrant.seed}>
-                            <Dropdown.Menu onChange={this.props.handleSeedChange}>
-                                {this.props.seedRange.map(seed => <Dropdown.Item onClick={() => this.props.handleSeedChange(seed, this.props.entrant.id)} key={seed} value={seed}>{seed}</Dropdown.Item>)}
-                            </Dropdown.Menu>
+                        <Dropdown scrolling floating 
+                            value={this.props.entrant.seed} 
+                            text={this.props.entrant.seed}>
+                                <Dropdown.Menu onChange={this.props.handleSeedChange}>
+                                    {this.props.seedRange.map(seed => 
+                                        <Dropdown.Item onClick={() => this.props.handleSeedChange(seed, this.props.entrant.id)} 
+                                            key={seed} 
+                                            value={seed}>
+                                                {seed}
+                                        </Dropdown.Item>)}
+                                </Dropdown.Menu>
                         </Dropdown>
-                        <Button color='red' floated='right' onClick={() => this.props.handleDeleteEntry(this.props.entrant.id)}>Kick Competitor</Button>
+                        <Button color='red' 
+                            floated='right' 
+                                onClick={() => this.props.handleDeleteEntry(this.props.entrant.id)}>
+                            Kick Competitor
+                        </Button>
                         </div>
                         : this.props.entrant.seed
                     : 'Tournament Started'}

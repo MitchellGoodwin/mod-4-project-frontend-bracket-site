@@ -182,7 +182,13 @@ class BracketShow extends React.Component{
                     matches={this.state.bracket.matches} 
                     handleWinner={this.handleWinner}
                     />
-                <EntrantsContainer status={this.state.bracket.status} handleDeleteEntry={this.handleDeleteEntry} user={this.state.bracket.user} logged_user={this.props.user} entrants={this.state.entrants} handleSeedChange={this.handleSeedChange}/>
+                <EntrantsContainer status={this.state.bracket.status} 
+                    handleDeleteEntry={this.handleDeleteEntry} 
+                        user={this.state.bracket.user} 
+                            logged_user={this.props.user} 
+                                entrants={this.state.entrants} 
+                                    handleSeedChange={this.handleSeedChange}
+                />
                 </>
             : null}
             </div>

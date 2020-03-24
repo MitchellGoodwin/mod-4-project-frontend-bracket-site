@@ -14,7 +14,13 @@ class Round extends React.Component{
 
         return (
             <Grid.Row className='round' centered columns={sortedMatches.filter(match => match.round > 1 || (match.user_one && match.user_two)).length} >
-                {sortedMatches.filter(match => match.round > 1 || (match.user_one && match.user_two)).map(match => <Match finals={sortedMatches.length === 1 && match.round > 1 ? true : false} status={this.props.status} bracket_user={this.props.bracket_user} handleWinner={this.props.handleWinner} key={match.id} match={match}/>)}
+                {sortedMatches.filter(match => match.round > 1 || (match.user_one && match.user_two)).map(match => 
+                <Match 
+                    finals={sortedMatches.length === 1 && match.round > 1 ? true : false} 
+                        status={this.props.status} bracket_user={this.props.bracket_user} 
+                            handleWinner={this.props.handleWinner} 
+                                key={match.id} match={match}
+                />)}
             </Grid.Row>
         )
     }

@@ -40,10 +40,18 @@ class Login extends Component {
             <Form onSubmit={this.handleSubmit}>
                 <Segment inverted raised size='large'>
                     <Form.Field>
-                        <input type="text" name='username' placeholder="Username" onChange={this.handleInput} value={this.state.username} />
+                        <input type="text" 
+                            name='username' 
+                                placeholder="Username" 
+                                    onChange={this.handleInput}  
+                                        value={this.state.username} />
                     </Form.Field>
                     <Form.Field>
-                        <input type="password" name='password' placeholder="password" onChange={this.handleInput} value={this.state.password} />
+                        <input type="password" 
+                            name='password' 
+                                placeholder="password" 
+                                    onChange={this.handleInput} 
+                                        value={this.state.password} />
                     </Form.Field>
 
                     <Button type='submit'>Submit</Button>

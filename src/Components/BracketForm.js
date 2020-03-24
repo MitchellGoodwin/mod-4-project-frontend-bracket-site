@@ -39,8 +39,17 @@ class BracketForm extends React.Component{
             <div>
                 <h1>Make Your New Bracket</h1>
                 <Form onSubmit={this.handleSubmit}>
-                    <input type="text" name='name' placeholder="Bracket Name" onChange={this.handleInput} value={this.state.name} /><br/>
-                    <textarea name='desc' placeholder="Add a Description" rows='10' cols='50' onChange={this.handleInput} value={this.state.desc} /><br/>
+                    <input type="text" 
+                        name='name' 
+                            placeholder="Bracket Name" 
+                                onChange={this.handleInput} 
+                                    value={this.state.name} /><br/>
+                    <textarea name='desc' 
+                        placeholder="Add a Description" 
+                            rows='10' 
+                                cols='50' 
+                                    onChange={this.handleInput} 
+                                        value={this.state.desc} /><br/>
                     <Button id="submit" type="submit">Submit</Button>
                 </Form>
             </div>

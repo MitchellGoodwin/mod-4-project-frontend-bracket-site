@@ -1,5 +1,13 @@
 .Bracket-card {
+  transition: margin 2s !important;
   margin: 20px !important;
+
+}
+
+.Bracket-card:hover {
+  /* transition: margin 2s !important; */
+  margin: 30px !important;
+
 }
 
 .Match-container {
