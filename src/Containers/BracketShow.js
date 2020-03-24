@@ -24,13 +24,18 @@ class BracketShow extends React.Component{
 
     renderOnStatus = () => {
         if (this.state.bracket.status === 'pending' && this.state.bracket.user.id === parseInt(localStorage.getItem('user_id'))) {
-            return <Button className='title' >Start Tournament</Button>
+            return <Button onClick={this.handleChangeStatus} className='title' >Start Tournament</Button>
         } else if (this.state.bracket.status === 'started') {
             return <h2 className='title' >Tournament In Progress</h2>
         } else if (this.state.bracket.status === 'finished') {
-            return <h2 className='title'>Tournament Finished</h2>
+            return <h2 className='title'>{`Tournament Winner: ${this.bracketWinner()}`}</h2>
         }
         
+    }
+
+    bracketWinner = () => {
+        let winner = this.state.bracket.matches.sort((a, b) => { return b.round - a.round})[0]
+        return (winner.winner ? winner.winner.username : null)
     }
 
     handleChangeStatus = () => {

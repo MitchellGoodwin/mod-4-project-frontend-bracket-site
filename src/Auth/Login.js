@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Form, Segment } from 'semantic-ui-react'
 
 import { withRouter } from 'react-router';
 
@@ -28,20 +29,27 @@ class Login extends Component {
     .then(data => {
         localStorage.setItem('auth_token',data.jwt)
         localStorage.setItem('user_id', data.user.id)
-        this.props.handleLogin()
+        this.props.handleLogin(data.user)
         this.props.history.push('/')
     })
     }
 
     render(){
         return (
-        <span >
+        <span className='form-tag'>
             <h2> Login </h2>
-            <form onSubmit={this.handleSubmit}>
-            <input type="text" name='username' placeholder="Username" onChange={this.handleInput} value={this.state.username} />
-            <input type="password" name='password' placeholder="password" onChange={this.handleInput} value={this.state.password} />
-            <input id="submit" type="submit" value="Submit" />
-            </form>
+            <Form onSubmit={this.handleSubmit}>
+                <Segment inverted raised size='large'>
+                    <Form.Field>
+                        <input type="text" name='username' placeholder="Username" onChange={this.handleInput} value={this.state.username} />
+                    </Form.Field>
+                    <Form.Field>
+                        <input type="password" name='password' placeholder="password" onChange={this.handleInput} value={this.state.password} />
+                    </Form.Field>
+
+                    <Button type='submit'>Submit</Button>
+                </Segment>
+            </Form>
         </span>
         )
     }

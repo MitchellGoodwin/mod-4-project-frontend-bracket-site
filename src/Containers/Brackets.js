@@ -1,6 +1,6 @@
 import React from 'react'
 import BracketCard from '../Components/BracketCard'
-import { Card } from 'semantic-ui-react'
+import { Card, Header } from 'semantic-ui-react'
 
 class Brackets extends React.Component {
 
@@ -23,9 +23,12 @@ class Brackets extends React.Component {
 
     render() {
         return (
-            <Card.Group>
-                {this.state.brackets.map(bracket => <BracketCard key={bracket.id} bracket={bracket}/>)}
-            </Card.Group>
+            <div>
+                <Header className='title' size='huge'>Find an Event</Header>
+                <Card.Group>
+                    {this.state.brackets.map(bracket => <BracketCard key={bracket.id} bracket={bracket}/>)}
+                </Card.Group>
+            </div>
         )
     }
 }

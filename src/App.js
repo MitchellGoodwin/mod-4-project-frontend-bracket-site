@@ -20,16 +20,30 @@ import SignUp from './Auth/SignUp';
 class App extends React.Component {
 
   state = {
-    logged_in: false,
+    logged_user: false,
   }
 
-  handleLogin = () => {
-    this.setState({ logged_in: true })
+  handleLogin = (user) => {
+    this.setState({ logged_user: user })
   }
 
   handleLogout = () => {
     localStorage.clear()
-    this.setState({ logged_in: false })
+    this.setState({ logged_user: false })
+  }
+
+  componentDidMount = () => {
+    if (localStorage.getItem('auth_token')) {
+      fetch(`http://localhost:3000/current`,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('auth_token')
+        }
+        })
+        .then(res => res.json())
+        .then(user => this.setState({ logged_user: user }))
+    }
   }
 
   render() {
