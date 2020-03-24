@@ -10,7 +10,7 @@ class EntrantsContainer extends React.Component{
         const seedRange = this.props.entrants ? this.props.entrants.map(entrant => entrant.seed) : []
 
         return(
-            <Table celled>
+            <Table inverted selectable striped celled>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>Competitor Rank</Table.HeaderCell>

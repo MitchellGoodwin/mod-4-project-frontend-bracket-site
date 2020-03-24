@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, Form } from 'semantic-ui-react'
 
 import { withRouter } from 'react-router';
 
@@ -37,11 +38,11 @@ class BracketForm extends React.Component{
         return(
             <div>
                 <h1>Make Your New Bracket</h1>
-                <form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSubmit}>
                     <input type="text" name='name' placeholder="Bracket Name" onChange={this.handleInput} value={this.state.name} /><br/>
                     <textarea name='desc' placeholder="Add a Description" rows='10' cols='50' onChange={this.handleInput} value={this.state.desc} /><br/>
-                    <input id="submit" type="submit" value="Submit" />
-                </form>
+                    <Button id="submit" type="submit">Submit</Button>
+                </Form>
             </div>
         )
     }

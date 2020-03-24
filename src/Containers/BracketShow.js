@@ -1,7 +1,7 @@
 import React from 'react'
 import EntrantsContainer from './EntrantsContainer'
 import MatchContainer from './MatchContainer'
-import { Button } from 'semantic-ui-react'
+import { Button, Header } from 'semantic-ui-react'
 
 
 class BracketShow extends React.Component{
@@ -24,11 +24,11 @@ class BracketShow extends React.Component{
 
     renderOnStatus = () => {
         if (this.state.bracket.status === 'pending' && this.state.bracket.user.id === parseInt(localStorage.getItem('user_id'))) {
-            return <Button >Start Tournament</Button>
+            return <Button className='title' >Start Tournament</Button>
         } else if (this.state.bracket.status === 'started') {
-            return <h2>Tournament In Progress</h2>
+            return <h2 className='title' >Tournament In Progress</h2>
         } else if (this.state.bracket.status === 'finished') {
-            return <h2>Tournament Finished</h2>
+            return <h2 className='title'>Tournament Finished</h2>
         }
         
     }
@@ -151,7 +151,8 @@ class BracketShow extends React.Component{
     render() {
         return (
             <div>
-                <h1>{this.state.bracket.name}</h1>
+                <Header className='title' size='huge'>{this.state.bracket.name}</Header>
+                <Header className='title' sub >{this.state.bracket.desc}</Header>
                 {this.inBracket()}
                 <br/><br/>
                 {this.renderOnStatus()}

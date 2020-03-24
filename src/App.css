@@ -1,3 +1,26 @@
 .Bracket-card {
   margin: 20px !important;
 }
+
+.Match-container {
+  width: fit-content;
+  
+}
+
+.Match-wrapper {
+  padding: 10px;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.round {
+  margin-left: -100%;
+  margin-right: -100%;
+  width: auto !important;
+  align-items: center !important;
+}
+
+.title {
+  margin-left: 50px !important;
+}

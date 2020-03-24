@@ -61,9 +61,9 @@ const RenderLoggedOut = () => {
 }
 
 const NavBar = () => (
-    <Segment clearing>
+    <Segment clearing inverted>
         <Header as='h1' floated='left'>
-            PlaceholderName
+            TourneyFinder
         </Header>
         <Header floated='right'>
             {localStorage.getItem('auth_token') ?

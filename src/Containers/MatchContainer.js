@@ -16,9 +16,11 @@ class MatchContainer extends React.Component{
         }
 
         return(
-            <Grid centered style={{overflow: 'auto'}} >
-                {this.props.matches ? rounds().map(round => <Round status={this.props.status} handleWinner={this.props.handleWinner} key={round[0].round} matches={round}/>) : null}
-            </Grid>
+            <div className='Match-wrapper'>
+                <Grid centered className='Match-container' >
+                    {this.props.matches ? rounds().map(round => <Round status={this.props.status} handleWinner={this.props.handleWinner} key={round[0].round} matches={round}/>) : null}
+                </Grid>
+            </div>
         )
     }
 }
