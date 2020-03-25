@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react'
+import { config } from '../Constants'
 
 import { withRouter } from 'react-router';
+
+const URL = config.url.API_URL
 
 class SignUp extends Component {
     state = {
@@ -19,7 +22,7 @@ class SignUp extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        fetch('http://localhost:3000/users',{
+        fetch(URL + '/users',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

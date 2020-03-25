@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react'
+import { config } from '../Constants'
 
 import { withRouter } from 'react-router';
+
+const URL = config.url.API_URL
 
 class Login extends Component {
     state = {
@@ -18,7 +21,7 @@ class Login extends Component {
     handleSubmit = (e) => {
     e.preventDefault()
 
-    fetch('http://localhost:3000/login',{
+    fetch(URL + '/login',{
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
