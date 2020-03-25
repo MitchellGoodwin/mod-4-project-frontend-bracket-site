@@ -8,23 +8,23 @@ Examples of similar sites: https://challonge.com/, https://smash.gg/
 
 ## General User Flow
 
-The site will have a navbar at the top of every page, with a site title and login/out, signup buttons.
+The site has a navbar at the top of every page, with a site title and login/out/signup buttons. It also has a create bracket button if the user is logged in to take them to a form to create their bracket. As well as a button to go back to the home page/bracket index.
 
-The page will have a list of different tournaments that they can click on to go to that tournament's bracket page. 
+The homepage has a list of different tournaments that they can click on to go to that tournament's bracket page. 
 
-That page will have the bracket up top with all the matches, showing the winners of each moving on to the next round until someone wins. At the bottom portion of the page there will be a standings table of the competitors.
+That bracket page has the bracket up top with all the matches, showing the winners of each moving on to the next round until someone wins. At the bottom portion of the page there will be a standings table of the competitors.
 
-If the user is logged in they can enter a tournament that they don't own, and hasnt started yet. They can edit their entry somewhat, including dropping out of the competition.
+If the user is logged in they can enter a tournament that they don't own, and hasnt started yet. They can edit their entry somewhat, mainly dropping out.
 
-A user can also create their own tournament, filling out a form to define properties of the tournament. To start it will be a name, picture, and description, but I'd like to add more later as a part of stretch goals, like setting an entry fee.
+A user can also create their own tournament, filling out a form to define properties of the tournament. To start it will be a name, and description, but I'd like to add more later as a part of stretch goals, like setting an entry fee.
 
-Once created other users can sign up for their tournament and the admin can change their seed value to change where people are in the bracket. I want the site to be responsive and create empty matches for the tournament according to number of entreants. The admin can mark the tournament as started, at which point no new users can join. Once started the admin can mark scores and winners of each match and the site will update to move the right entrant forward. For the purpose of the mvp I will assume each tournament is being run in person by the admin.
+Once created other users can sign up for their tournament and the admin can change their seed value to change where people are in the bracket. The site is responsive and creates empty matches for the tournament according to number of entreants. The admin can mark the tournament as started, at which point no new users can join. Once started the admin can mark winners of each match and the site will update to move the right entrant forward. For the purpose of the mvp I will assume each tournament is being run in person by the admin.
 
 Once complete the bracket cannot be edited anymore, but still viewed.
 
 ## Schema
 
-As of now I see my models as being:
+As of now my models are:
 
 * Users
 * Brackets
@@ -36,18 +36,19 @@ The relationships get a little wonky:
 * Each bracket belongs to one user as an admin
 * Users also have many brackets through entries and vice versa
 * A bracket has many matches, which belong to two users
+* Each match belongs to a bracket, as well as two users who are the opponents, and a winner. Each of the user associations is optional as winners arent decided right away, and matches can have empty slots.
 
-The above schema is kinda likly to change, as everything is pretty intermingeled. But for now, this is how I visualize it.
+## Challenges
 
-## MVP
+I had a lot of challenges with this project, both expected and unexpected. The backend logic ended taking a lot of whiteboarding and figuring out. I wanted the bracket model to be smart about reorganizing it's match models when there was a change to any of it's associated models, as well as being able to seed it's entrants into the proper matches, and that took a lot of time. I'm both proud of what I figured out, and wanting to improve it. For the sake of time I made a working set of methods to do all of that correctly, but I'm going to come back and fix it up later.
 
-I'm hoping to reach my mvp by the weekend. I'd like most of the base functionality listed above. For the brackets themselves, for this weekend if I can get all of the matches listed on the page, but not connected in a bracket style, with an ability to select a winner I'll be happy.
+Showing the bracket how I wanted to ended up being a huge problem. I have it sort of working through Semantic Grid, but it's got some issues. I think I need to start over with another resource or figure it out from scratch. As this is a CSS issue, it wasnt a focus of this project, but I'd really like to get it to work how I picture it.
 
-I'm going to start on my user model with authorization first, as I think my site will rely on that to make sense a good amount. From there, figure out the logic for generating matches correctly from varying amounts of entrants.
+I didn't reach any of my original stretch goals, as I lost a lot more time to the backend side than I expected. Overall I'm happy with this project though. I'm proud of what I have figured out so far on both sides of the app, and my long list of stretch goals left means that this will be a valuable porject to work on in the long run, which I'm happy to have.
 
 ## Stretch Goals
 
-* Mainly make the bracket display in a classic bracket style, with lines forming a sideways pyramid shape. This is my main stretch goal
+* Mainly make the bracket display in a classic bracket style, with lines forming a sideways pyramid shape. This is has already been a challenge, and I think I need to redo my styling from scratch for this component. Maybe look into D3.
 
 * Toggle showing predicted winners on the bracket view for each uncompleted match.
 
