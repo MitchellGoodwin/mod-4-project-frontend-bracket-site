@@ -2,7 +2,7 @@ const prod = {
     url: {
         API_URL: 'https://tourney-finder-backend.herokuapp.com/'
     }
-   }
+}
 
 const dev = {
     url: {
