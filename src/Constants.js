@@ -10,4 +10,4 @@ const dev = {
     }
 };
 
-export const config = !!process.env.DATABASE_URL ? prod : dev;
+export const config = !!process.env.DATABASE_URL ? prod : prod;
