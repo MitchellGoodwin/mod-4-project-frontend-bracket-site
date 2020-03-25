@@ -5,6 +5,8 @@ import NavBar from './Components/NavBar'
 import Brackets from './Containers/Brackets'
 import BracketShow from './Containers/BracketShow'
 import BracketForm from './Components/BracketForm'
+import { config } from './Constants'
+
 
 import {
   BrowserRouter as Router,
@@ -16,6 +18,8 @@ import {
 import CheckLogin from './Auth/CheckLogin';
 import Login from './Auth/Login';
 import SignUp from './Auth/SignUp';
+
+const URL = config.url.API_URL
 
 class App extends React.Component {
 
@@ -34,7 +38,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     if (localStorage.getItem('auth_token')) {
-      fetch(`http://localhost:3000/current`,{
+      fetch(URL + `/current`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

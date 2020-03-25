@@ -1,7 +1,11 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
+import { config } from '../Constants'
+
 
 import { withRouter } from 'react-router';
+
+const URL = config.url.API_URL
 
 class BracketForm extends React.Component{
 
@@ -19,7 +23,7 @@ class BracketForm extends React.Component{
     handleSubmit = (e) => {
     e.preventDefault()
 
-    fetch('http://localhost:3000/brackets',{
+    fetch(URL + '/brackets',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

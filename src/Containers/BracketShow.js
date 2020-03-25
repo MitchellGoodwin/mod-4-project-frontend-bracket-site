@@ -2,6 +2,9 @@ import React from 'react'
 import EntrantsContainer from './EntrantsContainer'
 import MatchContainer from './MatchContainer'
 import { Button, Header, Loader } from 'semantic-ui-react'
+import { config } from '../Constants'
+
+const URL = config.url.API_URL
 
 
 class BracketShow extends React.Component{
@@ -40,7 +43,7 @@ class BracketShow extends React.Component{
 
     handleChangeStatus = () => {
         this.setState({loading: true})
-        fetch(`http://localhost:3000/brackets/${this.state.bracket.id}`,{
+        fetch(`${URL}/brackets/${this.state.bracket.id}`,{
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -62,7 +65,7 @@ class BracketShow extends React.Component{
 
     handleMakeEntry = () => {
         this.setState({loading: true})
-        fetch('http://localhost:3000/entries',{
+        fetch(URL + '/entries',{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -85,7 +88,7 @@ class BracketShow extends React.Component{
 
     handleDeleteEntry = (id) => {
         this.setState({loading: true})
-        fetch(`http://localhost:3000/entries/${id}`,{
+        fetch(URL + `/entries/${id}`,{
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -105,7 +108,7 @@ class BracketShow extends React.Component{
     }
 
     componentDidMount() {
-        fetch(`http://localhost:3000/brackets/${this.props.match.params.bracketID}`,{
+        fetch(`${URL}/brackets/${this.props.match.params.bracketID}`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -126,7 +129,7 @@ class BracketShow extends React.Component{
 
     handleSeedChange = (seed, id) => {
         this.setState({loading: true})
-        fetch(`http://localhost:3000/entries/${id}`,{
+        fetch(`${URL}/entries/${id}`,{
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -146,7 +149,7 @@ class BracketShow extends React.Component{
 
     handleWinner = (winnerID, id) => {
         this.setState({loading: true})
-        fetch(`http://localhost:3000/matches/${id}`,{
+        fetch(`${URL}/matches/${id}`,{
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',

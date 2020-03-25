@@ -1,6 +1,9 @@
 import React from 'react'
 import BracketCard from '../Components/BracketCard'
 import { Card, Header } from 'semantic-ui-react'
+import { config } from '../Constants'
+
+const URL = config.url.API_URL
 
 class Brackets extends React.Component {
 
@@ -9,7 +12,7 @@ class Brackets extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/brackets',{
+        fetch(URL + "/brackets",{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
